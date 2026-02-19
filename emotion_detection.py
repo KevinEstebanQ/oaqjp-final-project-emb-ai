@@ -1,3 +1,4 @@
+""" emotion detection module """
 import requests
 
 def emotion_detector(text_to_analyse):
@@ -8,14 +9,10 @@ def emotion_detector(text_to_analyse):
 
     """
 
-    URL = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
+    url = "https://sn-watson-emotion.labs.skills.network/v1/" \
+            "watson.runtime.nlp.v1/NlpService/EmotionPredict"
     header = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
     input_json = { "raw_document": { "text": text_to_analyse } }
-    response = requests.post(url=URL, json=input_json, headers=header)
-     
+    response = requests.post(url=url, json=input_json, headers=header, timeout=5)
     return response.text
-
-
-ans = emotion_detector("hello im happy")
-print(ans)
-
+    
